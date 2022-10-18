@@ -56,8 +56,8 @@ const useStyles = makeStyles({
 
 async function getAndSetListingFee (marketplaceContract, setListingFee) {
   if (!marketplaceContract) return
-  const listingFee = (await marketplaceContract.getListingFee()) * 10000000000
-  setListingFee(ethers.utils.formatUnits(listingFee, 'ether'))
+  const listingFee = (await marketplaceContract.getListingFee()) * 10
+  setListingFee(ethers.utils.formatUnits(listingFee, 'gwei'))
 }
 
 export default function NFTCard ({ nft, action, updateNFT }) {
@@ -126,9 +126,13 @@ export default function NFTCard ({ nft, action, updateNFT }) {
       return
     }
     setPriceError(false)
-    const listingFee = await marketplaceContract.getListingFee()
+    const listingFee = (await marketplaceContract.getListingFee()) * 10000000000
     const priceInWei = ethers.utils.parseUnits(newPrice, 'ether')
-    const transaction = await marketplaceContract.createMarketItem(nftContract.address, nft.tokenId, priceInWei, { value: listingFee.toString() })
+    const transaction = await marketplaceContract.createMarketItem(nftContract.address, nft.tokenId, priceInWei,
+      {
+        gasLimit: 2100000,
+        value: listingFee.toString()
+      })
     await transaction.wait()
     updateNFT()
     return transaction
