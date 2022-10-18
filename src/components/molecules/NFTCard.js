@@ -56,7 +56,7 @@ const useStyles = makeStyles({
 
 async function getAndSetListingFee (marketplaceContract, setListingFee) {
   if (!marketplaceContract) return
-  const listingFee = await marketplaceContract.getListingFee()
+  const listingFee = (await marketplaceContract.getListingFee()) * 10000000000
   setListingFee(ethers.utils.formatUnits(listingFee, 'ether'))
 }
 

@@ -16,7 +16,7 @@ contract Marketplace is ReentrancyGuard {
     address payable private owner;
 
     // Challenge: make this price dynamic according to the current currency price
-    uint256 private listingFee = 0.045 ether;
+    uint256 private listingFee = 2500000;
 
     mapping(uint256 => MarketItem) private marketItemIdToMarketItem;
 
