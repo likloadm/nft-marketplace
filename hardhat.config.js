@@ -7,20 +7,16 @@ require('hardhat-gas-reporter')
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  defaultNetwork: 'hardhat',
+  defaultNetwork: 'QTUM',
   networks: {
     hardhat: {
       chainId: 1337
     },
-    mumbai: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
-      accounts: [process.env.ACCOUNT_PRIVATE_KEY, process.env.ACCOUNT2_PRIVATE_KEY],
-      gas: 5500000,
-      gasPrice: 7000000000
-    },
-    mainnet: {
-      url: `https://mainnet.infura.io/v3/${process.env.INFURA_ID}`,
-      accounts: [process.env.ACCOUNT_PRIVATE_KEY, process.env.ACCOUNT2_PRIVATE_KEY]
+    QTUM: {
+      url: 'https://eth2.quark.blue:23890',
+      accounts: [process.env.ACCOUNT_PRIVATE_KEY],
+      gas: 2100000,
+      gasPrice: 8000000000
     }
   },
   solidity: {

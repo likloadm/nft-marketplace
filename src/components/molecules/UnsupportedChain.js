@@ -21,7 +21,7 @@ async function addNetwork (chain, account) {
     blockExplorerUrls: [((chain.explorers && chain.explorers.length > 0 && chain.explorers[0].url) ? chain.explorers[0].url : chain.infoURL)]
   }
 
-  window.ethereum.request({
+  window.ariel.request({
     method: 'wallet_addEthereumChain',
     params: [params, account]
   }).catch((error) => {

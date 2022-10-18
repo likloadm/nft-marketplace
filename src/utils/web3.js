@@ -1,7 +1,7 @@
 export function getProvider () {
-  if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-    if (window.ethereum.isMetaMask) return 'Metamask'
-    if (window.ethereum.isImToken) return 'imToken'
+  if (typeof window !== 'undefined' && typeof window.ariel !== 'undefined') {
+    if (window.ariel.isMetaMask) return 'Metamask'
+    if (window.ariel.isImToken) return 'imToken'
   }
   return 'Wallet'
 }

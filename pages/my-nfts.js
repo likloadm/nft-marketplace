@@ -14,7 +14,7 @@ export default function CreatorDashboard () {
   const [hasWindowEthereum, setHasWindowEthereum] = useState(false)
 
   useEffect(() => {
-    setHasWindowEthereum(window.ethereum)
+    setHasWindowEthereum(window.ariel)
   }, [])
 
   useEffect(() => {

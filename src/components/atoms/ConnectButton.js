@@ -7,7 +7,7 @@ export default function ConnectButton () {
   const [hasWindowEthereum, setHasWindowEthereum] = useState(false)
 
   useEffect(() => {
-    setHasWindowEthereum(window.ethereum)
+    setHasWindowEthereum(window.ariel)
   }, [])
 
   const buttonText = hasWindowEthereum ? 'Connect' : 'Download Metamask'

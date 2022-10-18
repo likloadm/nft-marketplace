@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const contextDefaultValues = {
   account: '',
-  network: 'maticmum',
+  network: 'QTUM',
   balance: 0,
   connectWallet: () => {},
   marketplaceContract: null,
@@ -17,8 +17,8 @@ const contextDefaultValues = {
 }
 
 const networkNames = {
-  maticmum: 'MUMBAI',
-  unknown: 'LOCALHOST'
+  maticmum: 'QTUM',
+  unknown: 'QTUM'
 }
 
 export const Web3Context = createContext(
@@ -39,14 +39,15 @@ export default function Web3Provider ({ children }) {
   }, [])
 
   async function initializeWeb3WithoutSigner () {
-    const alchemyProvider = new ethers.providers.AlchemyProvider(80001)
+    const provider = new ethers.providers.JsonRpcProvider('https://eth2.quark.blue:23890')
+    // const alchemyProvider = new ethers.providers.AlchemyProvider(80001)
     setHasWeb3(false)
-    await getAndSetWeb3ContextWithoutSigner(alchemyProvider)
+    await getAndSetWeb3ContextWithoutSigner(provider)
   }
 
   async function initializeWeb3 () {
     try {
-      if (!window.ethereum) {
+      if (!window.ariel) {
         await initializeWeb3WithoutSigner()
         return
       }
@@ -113,6 +114,7 @@ export default function Web3Provider ({ children }) {
       return false
     }
     const { data } = await axios(`/api/addresses?network=${networkName}`)
+    console.log(data, networkName)
     const marketplaceContract = new ethers.Contract(data.marketplaceAddress, Market.abi, signer)
     setMarketplaceContract(marketplaceContract)
     const nftContract = new ethers.Contract(data.nftAddress, NFT.abi, signer)
