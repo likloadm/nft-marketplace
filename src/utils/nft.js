@@ -31,7 +31,7 @@ export function mapCreatedAndOwnedTokenIdsAsMarketItems (marketplaceContract, nf
 
 export function mapMarketItem (marketItem, metadata, tokenId, account, hasMarketApproval) {
   return {
-    price: marketItem.price ? ethers.utils.formatUnits(marketItem.price, 'ether') : undefined,
+    price: marketItem.price ? ethers.utils.formatUnits(marketItem.price * 10, 'gwei') : undefined,
     tokenId: marketItem.tokenId || tokenId,
     marketItemId: marketItem.marketItemId || undefined,
     creator: marketItem.creator || account,

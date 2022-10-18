@@ -101,6 +101,7 @@ export default function NFTCard ({ nft, action, updateNFT }) {
   async function buyNft (nft) {
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
     const transaction = await marketplaceContract.createMarketSale(nftContract.address, nft.marketItemId, {
+      gasLimit:2100000,
       value: price
     })
     await transaction.wait()
@@ -127,7 +128,7 @@ export default function NFTCard ({ nft, action, updateNFT }) {
     }
     setPriceError(false)
     const listingFee = (await marketplaceContract.getListingFee()) * 10000000000
-    const priceInWei = ethers.utils.parseUnits(newPrice, 'ether')
+    const priceInWei = ethers.utils.parseUnits(newPrice, 'ether') / 10000000000
     const transaction = await marketplaceContract.createMarketItem(nftContract.address, nft.tokenId, priceInWei,
       {
         gasLimit: 2100000,
