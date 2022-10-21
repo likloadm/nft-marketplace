@@ -101,7 +101,7 @@ export default function NFTCard ({ nft, action, updateNFT }) {
   async function buyNft (nft) {
     const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
     const transaction = await marketplaceContract.createMarketSale(nftContract.address, nft.marketItemId, {
-      gasLimit:2100000,
+      gasLimit: 2100000,
       value: price
     })
     await transaction.wait()
